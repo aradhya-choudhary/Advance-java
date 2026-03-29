@@ -21,7 +21,7 @@ public class Smin {
                            .distinct()
                            .collect(Collectors.toList());
             System.out.println(result5);
-
+            
 
 
     }
