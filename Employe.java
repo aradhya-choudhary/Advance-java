@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 class Employee {
     int id;
     String name;
@@ -24,7 +25,7 @@ class Employee {
 public class Employe {
     
 // Sample ArrayList (used in questions)
-public class Main {
+
     public static void main(String[] args) {
 
         ArrayList<Employee> empList = new ArrayList<>(Arrays.asList(
@@ -44,10 +45,48 @@ public class Main {
       System.out.println(result3);
 
         Optional<Employee> result4 = empList.stream().min((a,b)-> (int)a.getAge()-(int)b.getAge());
-        result4.ifPresent(System.out::println);
+        
+            empList.stream()
+    .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+    .skip(1)
+    .map(Employee::getSalary)   // 👉 extract salary
+    .findFirst()
+    .ifPresent(System.out::println);
+    /// question 7 ///
+empList.stream()
+    .sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+    .limit(3)
+    .forEach(e -> 
+        System.out.println(e.getName() + " " + e.getSalary())
+    );
+    
+// 8 question 
+empList.stream()
+    .sorted(Comparator.comparingDouble(Employee::getSalary)) // ascending
+    .limit(3)
+    .forEach(e ->
+        System.out.println(e.getName() + " " + e.getSalary())
+    );
+    //9 question important question for exam
+    empList.stream()
+            .collect(Collectors.toMap(
+                Employee:: getName,
+                e->e,
+                (e1, e2)-> e1
+            ))
+            .values()
+            .forEach(System.out::println);
 
-    }
 
-
+            //11
+            empList.stream()
+    .filter(e -> e.getDepartment().equals("IT")) // only IT
+    .map(Employee::getSalary)                   // get salaries
+    .min(Double::compare)                       // find minimum
+    .ifPresent(System.out::println);
+//13 from 9 to 15 imp questions for exam
+    
+            
 }
 }
+
