@@ -86,7 +86,9 @@ empList.stream()
     .ifPresent(System.out::println);
 //13 from 9 to 15 imp questions for exam
     
-            
+          // 4 question 
+          
+          
 }
 }
 
